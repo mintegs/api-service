@@ -1,0 +1,41 @@
+{
+  "name": "node-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src",
+    "start": "node dist",
+    "build": "tsc",
+    "prettier": "prettier -w ./",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@types/node": "^20.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "husky": "^8.0.0"
+  },
+  "dependencies": {
+    "husky": "^8.0.3",
+    "typescript": "^5.0.4"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
+  }
+}
