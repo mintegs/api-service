@@ -1,3 +1,8 @@
-import { createServer } from 'http'
+import * as dotenv from 'dotenv'
+import { start } from './main'
 
-createServer().listen(3000, () => console.log('server is running'))
+// Setup dotenv config
+dotenv.config()
+
+// Run server
+start()
