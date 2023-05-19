@@ -10,7 +10,7 @@ export default class Core {
     this.app = express()
 
     // Import router
-    this.app.use('/v1', router)
+    this.app.use('/', router)
   }
 
   getApp(): express.Application {
