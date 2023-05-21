@@ -1,8 +1,14 @@
-import { Document } from 'mongoose'
+import { Document, Model } from 'mongoose'
 import { device } from './http'
 
 export type Role = undefined | 'ADMIN'
 export type Status = 'INACTIVE' | 'ACTIVE' | 'SUSPENDED'
+
+export declare interface Models {
+  Session: SessionModel
+  User: UserModel
+  Verification: VerificationModel
+}
 
 export interface UserDocument extends Document {
   avatar?: string
@@ -31,3 +37,7 @@ export interface VerificationDocument extends Document {
   used: boolean
   user: UserDocument
 }
+
+type VerificationModel = Model<VerificationDocument>
+type UserModel = Model<UserDocument>
+type SessionModel = Model<SessionDocument>
