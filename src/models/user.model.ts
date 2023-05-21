@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import { device } from '../core/contracts/http'
 import { UserDocument } from '../core/contracts/models'
 
 const userSchema = new Schema(
@@ -72,10 +73,10 @@ userSchema.index({ createdAt: -1 })
 
 /** Create session if user login is successful and return jwt token
  * @param {string} ip
- * @param {object} operatingSystem
+ * @param {object} device
  * @return {string} token
  */
-userSchema.methods.generateSession = async function (ip: string, os: any) {
+userSchema.methods.generateSession = async function (ip: string, os: device) {
   // Generate jwt token
   //   const token = signToken({
   //     id: this.id,

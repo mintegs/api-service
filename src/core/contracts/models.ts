@@ -1,4 +1,5 @@
 import { Document } from 'mongoose'
+import { device } from './http'
 
 export type Role = undefined | 'ADMIN'
 export type Status = 'INACTIVE' | 'ACTIVE' | 'SUSPENDED'
@@ -13,5 +14,13 @@ export interface UserDocument extends Document {
   role: Role
   status: Status
   username: string
-  generateSession: (ip: string, os: any) => Promise<string>
+  generateSession: (ip: string, device: device) => Promise<string>
+}
+
+export interface SessionDocument extends Document {
+  expiryDate: Date
+  ip: string
+  device: device
+  token: string
+  user: UserDocument
 }
