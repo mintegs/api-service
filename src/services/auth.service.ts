@@ -1,4 +1,4 @@
-import BaseService from '../core/contracts/base.service'
+import BaseService from '../core/contracts/baseService'
 
 export default class AuthService extends BaseService {
   signupUser() {

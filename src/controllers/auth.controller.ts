@@ -1,4 +1,4 @@
-import BaseController from '../core/contracts/base.controller'
+import BaseController from '../core/contracts/baseController'
 import AuthService from '../services/auth.service'
 
 class AuthController extends BaseController {
