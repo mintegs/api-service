@@ -3,7 +3,7 @@ import { SessionDocument } from '../core/contracts/models'
 
 const sessionSchema = new Schema(
   {
-    os: {
+    device: {
       required: true,
       type: Object,
     },
