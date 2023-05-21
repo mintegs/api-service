@@ -1,5 +1,6 @@
 import express from 'express'
-import device from './core/middleware/device.middleware'
+import deviceMiddleware from './core/middleware/device.middleware'
+import ipMiddleware from './core/middleware/ip.middleware'
 import router from './router'
 
 export default class Core {
@@ -14,7 +15,8 @@ export default class Core {
      * @private
      * @package cors, compression, helmet, body-parser, morgan
      */
-    this.app.use(device)
+    this.app.use(deviceMiddleware)
+    this.app.use(ipMiddleware)
 
     // Import router
     this.app.use('/', router)
