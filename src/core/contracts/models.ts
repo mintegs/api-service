@@ -24,3 +24,10 @@ export interface SessionDocument extends Document {
   token: string
   user: UserDocument
 }
+
+export interface VerificationDocument extends Document {
+  code: string
+  expiryDate: Date
+  used: boolean
+  user: UserDocument
+}
