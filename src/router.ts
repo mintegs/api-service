@@ -7,8 +7,11 @@ const router: Router = Router()
 import authController from './controllers/auth.controller'
 
 /** @define routes */
-router.get('/', (req, res, next) => {
-  return res.send(authController.register())
-})
+// auth routes
+router.post('/auth/sign-up', authController.signUp)
+router.post('/auth/sign-in', authController.signIn)
+router.get('/auth/google', authController.google)
+router.get('/auth/github', authController.github)
+router.get('/auth/verify-identity/:code', authController.verifyIdentity)
 
 export default router

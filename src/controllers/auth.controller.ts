@@ -1,4 +1,6 @@
+import { NextFunction, Response } from 'express'
 import BaseController from '../core/contracts/baseController'
+import { CustomRequest } from '../core/contracts/http'
 import AuthService from '../services/auth.service'
 
 class AuthController extends BaseController {
@@ -6,8 +8,54 @@ class AuthController extends BaseController {
     super()
   }
 
-  register() {
-    return this.authService.signupUser()
+  signUp(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      return this.sendResponse(res, 200, {
+        message: 'register user',
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  signIn(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      return this.sendResponse(res, 200, {
+        message: 'login user',
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  google(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      return this.sendResponse(res, 200, {
+        message: 'login google',
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  github(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      return this.sendResponse(res, 200, {
+        message: 'login github',
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  verifyIdentity(req: CustomRequest, res: Response, next: NextFunction) {
+    try {
+      return this.sendResponse(res, 200, {
+        message: 'verify identity',
+      })
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

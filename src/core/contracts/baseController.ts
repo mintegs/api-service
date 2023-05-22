@@ -19,7 +19,7 @@ export default abstract class BaseController {
    * @param {object} data
    * @returns response server
    */
-  sendResponse(res: Response, status = 200, data?: object): Response {
+  protected sendResponse(res: Response, status = 200, data?: object): Response {
     return res.status(status).json(data)
   }
 }
