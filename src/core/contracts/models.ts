@@ -38,6 +38,6 @@ export interface VerificationDocument extends Document {
   user: UserDocument
 }
 
-type VerificationModel = Model<VerificationDocument>
-type UserModel = Model<UserDocument>
-type SessionModel = Model<SessionDocument>
+export type VerificationModel = Model<VerificationDocument>
+export type UserModel = Model<UserDocument>
+export type SessionModel = Model<SessionDocument>
