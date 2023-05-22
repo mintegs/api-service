@@ -1,7 +1,7 @@
 import User from '../../models/user.model'
 import { Status, UserDocument, UserModel } from '../contracts/models'
 
-export default new (class UserRepository {
+export class UserRepository {
   private userModel: UserModel
 
   constructor() {
@@ -34,4 +34,22 @@ export default new (class UserRepository {
       status,
     }).save()
   }
-})()
+
+  async createNewUser({
+    email,
+    username,
+    status,
+  }: {
+    email: string
+    username: string
+    status?: Status
+  }): Promise<UserDocument> {
+    return await new this.userModel({
+      email,
+      username,
+      status,
+    }).save()
+  }
+}
+
+export default new UserRepository()

@@ -1,6 +1,7 @@
 import { NextFunction, Response } from 'express'
 import BaseController from '../core/contracts/baseController'
 import { CustomRequest } from '../core/contracts/http'
+import { UserRepository } from '../core/repositories/user.repository'
 import AuthService from '../services/auth.service'
 
 class AuthController extends BaseController {
@@ -59,4 +60,4 @@ class AuthController extends BaseController {
   }
 }
 
-export default new AuthController(new AuthService())
+export default new AuthController(new AuthService(new UserRepository()))
