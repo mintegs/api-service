@@ -27,7 +27,7 @@ export default class AuthService extends BaseService {
       }
 
       // Create new user
-      const newUser = await this.userRepository.createNewUser({
+      const newUser = await this.userRepository.create({
         email,
         username,
       })

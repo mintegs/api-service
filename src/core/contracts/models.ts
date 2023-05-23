@@ -23,6 +23,18 @@ export interface UserDocument extends Document {
   generateSession: (ip: string, device: device) => Promise<string>
 }
 
+export interface UserDto {
+  avatar?: string
+  bio?: string
+  birthday?: Date
+  email: string
+  job?: string
+  name?: string
+  role?: Role
+  status?: Status
+  username: string
+}
+
 export interface SessionDocument extends Document {
   expiryDate: Date
   ip: string

@@ -1,5 +1,5 @@
 import User from '../../models/user.model'
-import { Status, UserDocument, UserModel } from '../contracts/models'
+import { UserDocument, UserDto, UserModel } from '../contracts/models'
 
 export class UserRepository {
   private userModel: UserModel
@@ -17,37 +17,9 @@ export class UserRepository {
     })
   }
 
-  async generateNewUser({
-    email,
-    username,
-    status,
-  }: {
-    email: string
-    username?: string
-    status?: Status
-  }): Promise<UserDocument> {
+  async create(data: UserDto): Promise<UserDocument> {
     return await new this.userModel({
-      email,
-      username:
-        username ??
-        'user' + Math.floor(123456789 + Math.random() * 987654321).toString(),
-      status,
-    }).save()
-  }
-
-  async createNewUser({
-    email,
-    username,
-    status,
-  }: {
-    email: string
-    username: string
-    status?: Status
-  }): Promise<UserDocument> {
-    return await new this.userModel({
-      email,
-      username,
-      status,
+      ...data,
     }).save()
   }
 }
