@@ -1,9 +1,13 @@
 import BaseService from '../core/contracts/baseService'
 import { ErrorMessage } from '../core/lib/errorMessage'
 import { UserRepository } from '../core/repositories/user.repository'
+import { VerificationRepository } from '../core/repositories/verification.repository'
 
 export default class AuthService extends BaseService {
-  constructor(private readonly userRepository: UserRepository) {
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly verificationRepository: VerificationRepository
+  ) {
     super()
   }
 
@@ -33,7 +37,10 @@ export default class AuthService extends BaseService {
       })
 
       // Create a verification code for account activation
-
+      const newVerification = await this.verificationRepository.create({
+        user: newUser.id,
+        expiryDate: new Date(new Date().setHours(new Date().getHours() + 2)),
+      })
       // Send verification code to email of user
       return 'create new user'
     } catch (error) {

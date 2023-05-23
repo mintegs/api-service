@@ -50,6 +50,11 @@ export interface VerificationDocument extends Document {
   user: UserDocument
 }
 
+export interface VerificationDto {
+  expiryDate: Date
+  user: UserDocument
+}
+
 export type VerificationModel = Model<VerificationDocument>
 export type UserModel = Model<UserDocument>
 export type SessionModel = Model<SessionDocument>

@@ -2,6 +2,7 @@ import { NextFunction, Response } from 'express'
 import BaseController from '../core/contracts/baseController'
 import { CustomRequest } from '../core/contracts/http'
 import { UserRepository } from '../core/repositories/user.repository'
+import { VerificationRepository } from '../core/repositories/verification.repository'
 import AuthService from '../services/auth.service'
 
 class AuthController extends BaseController {
@@ -9,11 +10,11 @@ class AuthController extends BaseController {
     super()
   }
 
-  signUp(req: CustomRequest, res: Response, next: NextFunction) {
+  async signUp(req: CustomRequest, res: Response, next: NextFunction) {
     try {
-      return this.sendResponse(res, 200, {
-        message: 'register user',
-      })
+      await this.authService.signUp(req.body)
+
+      return this.sendResponse(res, 201)
     } catch (error) {
       next(error)
     }
@@ -60,4 +61,6 @@ class AuthController extends BaseController {
   }
 }
 
-export default new AuthController(new AuthService(new UserRepository()))
+export default new AuthController(
+  new AuthService(new UserRepository(), new VerificationRepository())
+)
