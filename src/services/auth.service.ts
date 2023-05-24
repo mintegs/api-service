@@ -11,7 +11,13 @@ export default class AuthService extends BaseService {
     super()
   }
 
-  async signUp({ email, username }: { email: string; username: string }) {
+  async signUp({
+    email,
+    username,
+  }: {
+    email: string
+    username: string
+  }): Promise<void> {
     try {
       // Find user
       const existingUser = await this.userRepository.findByEmailOrUsername(
@@ -42,7 +48,38 @@ export default class AuthService extends BaseService {
         expiryDate: new Date(new Date().setHours(new Date().getHours() + 2)),
       })
       // Send verification code to email of user
-      return 'create new user'
+      // return 'create new user'
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async signIn(email: string): Promise<void> {
+    try {
+      // Find user
+      const user = await this.userRepository.findByEmailOrUsername(email)
+      // If find user, handle it
+      if (user) {
+        // If the user's status was suspended, handle it
+        if (user.status === 'SUSPENDED') {
+          throw ErrorMessage.setter(
+            'Account status',
+            'Your account is suspended see support for reviewing your account',
+            403
+          )
+        }
+
+        // Create a verification code for generate jwt
+        const newVerification = await this.verificationRepository.create({
+          user: user.id,
+          // 10 minute
+          expiryDate: new Date(
+            new Date().setMinutes(new Date().getMinutes() + 10)
+          ),
+        })
+
+        // Send verification code to email of user
+      }
     } catch (error) {
       throw error
     }

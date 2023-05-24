@@ -20,11 +20,10 @@ class AuthController extends BaseController {
     }
   }
 
-  signIn(req: CustomRequest, res: Response, next: NextFunction) {
+  async signIn(req: CustomRequest, res: Response, next: NextFunction) {
     try {
-      return this.sendResponse(res, 200, {
-        message: 'login user',
-      })
+      await this.authService.signIn(req.body)
+      return this.sendResponse(res, 200)
     } catch (error) {
       next(error)
     }
