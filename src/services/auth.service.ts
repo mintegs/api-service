@@ -1,7 +1,9 @@
 import BaseService from '../core/contracts/baseService'
+import { device } from '../core/contracts/http'
 import { ErrorMessage } from '../core/lib/errorMessage'
 import { UserRepository } from '../core/repositories/user.repository'
 import { VerificationRepository } from '../core/repositories/verification.repository'
+import { getGoogleTokens, getGoogleUser } from '../core/utilities/oauthAdapter'
 
 export default class AuthService extends BaseService {
   constructor(
@@ -79,6 +81,53 @@ export default class AuthService extends BaseService {
         })
 
         // Send verification code to email of user
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async google({
+    code,
+    ipAddress,
+    device,
+  }: {
+    code: string
+    ipAddress: string
+    device: device
+  }) {
+    try {
+      // Get access_token and id_token
+      const { access_token, id_token } = await getGoogleTokens(code)
+
+      // Get user information from google
+      const { email } = await getGoogleUser({
+        access_token,
+        id_token,
+      })
+
+      // Find user
+      const user = await this.userRepository.findByEmailOrUsername(email)
+
+      // If existing user, handle it
+      if (user) {
+        // If the user's status was suspended, handle it
+        if (user.status === 'SUSPENDED') {
+          throw ErrorMessage.setter(
+            'Account status',
+            'Your account is suspended see support for reviewing your account',
+            403
+          )
+        }
+
+        // If the user's status was inactive, change status to active
+        if (user.status === 'INACTIVE') {
+          await user.set({ status: 'ACTIVE' }).save()
+        }
+
+        // Generate jwt token and create new session
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return await user.generateSession(ipAddress, device)
       }
     } catch (error) {
       throw error

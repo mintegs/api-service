@@ -29,11 +29,18 @@ class AuthController extends BaseController {
     }
   }
 
-  google(req: CustomRequest, res: Response, next: NextFunction) {
+  async google(
+    { query: { code }, ipAddress, device }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      return this.sendResponse(res, 200, {
-        message: 'login google',
+      const jwtToken = await this.authService.google({
+        code: code as string,
+        ipAddress: ipAddress ?? '',
+        device: device ?? { name: 'unknown' },
       })
+      return this.sendResponse(res, 200, { jwtToken })
     } catch (error) {
       next(error)
     }
