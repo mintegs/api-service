@@ -40,17 +40,25 @@ class AuthController extends BaseController {
         ipAddress: ipAddress ?? '',
         device: device ?? { name: 'unknown' },
       })
-      return this.sendResponse(res, 200, { jwtToken })
+      return res.redirect(302, `https://${process.env.DOMAIN}`)
     } catch (error) {
       next(error)
     }
   }
 
-  github(req: CustomRequest, res: Response, next: NextFunction) {
+  async github(
+    { query: { code }, ipAddress, device }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      return this.sendResponse(res, 200, {
-        message: 'login github',
+      const jwtToken = await this.authService.github({
+        code: code as string,
+        ipAddress: ipAddress ?? '',
+        device: device ?? { name: 'unknown' },
       })
+
+      return res.redirect(302, `https://${process.env.DOMAIN}`)
     } catch (error) {
       next(error)
     }

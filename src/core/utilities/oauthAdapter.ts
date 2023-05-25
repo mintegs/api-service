@@ -1,5 +1,47 @@
 import axios from 'axios'
-import { GoogleOauthToken, GoogleUser } from '../contracts/oauth'
+import { GithubUser, GoogleOauthToken, GoogleUser } from '../contracts/oauth'
+
+/**
+ * @function getGithubToken
+ * @description this function is used to get access_token using the code sent from github
+ * @param {string} code
+ * @returns {string} access_token
+ */
+export const getGithubToken = async (code: string): Promise<string> => {
+  try {
+    const clientId = process.env.GITHUB_CLIENT_ID || ''
+    const clientSecret = process.env.GITHUB_CLIENT_SECRET || ''
+    const { data } = await axios.post(
+      `https://github.com/login/oauth/access_token?client_id=${clientId}&client_secret=${clientSecret}&code=${code}`
+    )
+    const objectData = new URLSearchParams(data)
+    return objectData.get('access_token') as string
+  } catch (error) {
+    throw error
+  }
+}
+
+/**
+ * @function getGithubUser
+ * @description this function is to send access_token to github server to get email and user information
+ * @param {string} access_token
+ * @returns {object} GitHubUser
+ */
+export const getGithubUser = async (
+  accessToken: string
+): Promise<GithubUser> => {
+  try {
+    const { data } = await axios.get('https://api.github.com/user', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    return data
+  } catch (error) {
+    throw error
+  }
+}
 
 /**
  * @function getGoogleTokens
