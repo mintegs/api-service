@@ -3,11 +3,23 @@ import BaseController from '../core/contracts/baseController'
 import { CustomRequest } from '../core/contracts/http'
 import { UserRepository } from '../core/repositories/user.repository'
 import { VerificationRepository } from '../core/repositories/verification.repository'
+import { cookieOption } from '../core/utilities/cookie'
 import AuthService from '../services/auth.service'
 
 class AuthController extends BaseController {
   constructor(private readonly authService: AuthService) {
     super()
+  }
+
+  private setCookie(
+    res: Response,
+    token: string | null,
+    maxAge: number = 31 * 24 * 60 * 60 * 1000
+  ) {
+    res.cookie('mintegs_token', token, {
+      ...cookieOption,
+      maxAge,
+    })
   }
 
   async signUp(req: CustomRequest, res: Response, next: NextFunction) {
@@ -40,6 +52,9 @@ class AuthController extends BaseController {
         ipAddress: ipAddress ?? '',
         device: device ?? { name: 'unknown' },
       })
+
+      this.setCookie(res, jwtToken)
+
       return res.redirect(302, `https://${process.env.DOMAIN}`)
     } catch (error) {
       next(error)
@@ -57,6 +72,8 @@ class AuthController extends BaseController {
         ipAddress: ipAddress ?? '',
         device: device ?? { name: 'unknown' },
       })
+
+      this.setCookie(res, jwtToken)
 
       return res.redirect(302, `https://${process.env.DOMAIN}`)
     } catch (error) {
