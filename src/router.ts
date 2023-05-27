@@ -1,5 +1,6 @@
+import * as express from 'express'
 import { Router } from 'express'
-const router: Router = Router()
+const router: Router = express.Router()
 
 // Middleware
 

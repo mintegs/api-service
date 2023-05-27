@@ -49,8 +49,8 @@ class AuthController extends BaseController {
     try {
       const jwtToken = await this.authService.google({
         code: code as string,
-        ipAddress,
-        device,
+        ipAddress: ipAddress ?? '',
+        device: device ?? { name: 'unknown' },
       })
 
       this.setCookie(res, jwtToken)
@@ -89,8 +89,8 @@ class AuthController extends BaseController {
     try {
       const token = await this.authService.verifyIdentity({
         code: code as string,
-        ipAddress,
-        device,
+        ipAddress: ipAddress ?? '',
+        device: device ?? { name: 'unknown' },
       })
 
       this.setCookie(res, token)
