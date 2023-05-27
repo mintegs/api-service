@@ -1,5 +1,6 @@
 import Verification from '../../models/verification.model'
 import {
+  UserDocument,
   VerificationDocument,
   VerificationDto,
   VerificationModel,
@@ -26,6 +27,16 @@ export class VerificationRepository {
       ...data,
       code,
     }).save()
+  }
+
+  async find(code: string): Promise<VerificationDocument | null> {
+    return await this.verificationModel
+      .findOne({
+        code,
+        expiryDate: { $gt: new Date() },
+        used: false,
+      })
+      .populate<{ user: UserDocument }>('user')
   }
 }
 

@@ -212,4 +212,41 @@ export default class AuthService extends BaseService {
       throw error
     }
   }
+
+  async verifyIdentity({
+    code,
+    ipAddress,
+    device,
+  }: {
+    code: string
+    ipAddress: string
+    device: device
+  }): Promise<string> {
+    try {
+      // Find verification
+      const verification = await this.verificationRepository.find(code)
+
+      // If find verification, handle it
+      if (verification) {
+        // If the user's status wasn't suspended, handle it
+        if (verification.user.status !== 'SUSPENDED') {
+          // If the user's status was inactive, change status to active
+          if (verification.user.status === 'INACTIVE') {
+            // Change status to active
+            await verification.user.set({ status: 'ACTIVE' }).save()
+          }
+
+          // Expire verification
+          await verification.updateOne({ used: true })
+
+          // Generate jwt token and create new session and return it
+          return await verification.user.generateSession(ipAddress, device)
+        }
+      }
+      // Otherwise, error 400
+      throw ErrorMessage.badRequest()
+    } catch (error) {
+      throw error
+    }
+  }
 }
