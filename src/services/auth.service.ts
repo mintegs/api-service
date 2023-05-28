@@ -3,6 +3,7 @@ import { device } from '../core/contracts/http'
 import { ErrorMessage } from '../core/lib/errorMessage'
 import { UserRepository } from '../core/repositories/user.repository'
 import { VerificationRepository } from '../core/repositories/verification.repository'
+import { authTemplate } from '../core/utilities/mail'
 import {
   getGithubToken,
   getGithubUser,
@@ -54,8 +55,25 @@ export default class AuthService extends BaseService {
         user: newUser.id,
         expiryDate: new Date(new Date().setHours(new Date().getHours() + 2)),
       })
+
       // Send verification code to email of user
-      // return 'create new user'
+      this.mailService.sendMail({
+        to: newUser.email,
+        from: '"Mintegs" <support@mintegs.com>',
+        subject: 'Confirm account',
+        html: authTemplate({
+          intro:
+            'Welcome to Mintegs! We are very excited to have you as a member.',
+          action: {
+            instructions: 'Please confirm your account below',
+            buttonText: 'Confirm your account',
+          },
+          data: {
+            username: newUser.username,
+            code: newVerification.code,
+          },
+        }),
+      })
     } catch (error) {
       throw error
     }
@@ -86,6 +104,21 @@ export default class AuthService extends BaseService {
         })
 
         // Send verification code to email of user
+        this.mailService.sendMail({
+          to: user.email,
+          from: '"Mintegs" <support@mintegs.com>',
+          subject: 'Sign in account',
+          html: authTemplate({
+            intro: 'This email is valid until 10 minutes from now.',
+            action: {
+              buttonText: 'Sign in your account',
+            },
+            data: {
+              username: user.username,
+              code: newVerification.code,
+            },
+          }),
+        })
       }
     } catch (error) {
       throw error

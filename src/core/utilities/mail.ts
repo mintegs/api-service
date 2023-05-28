@@ -1,3 +1,4 @@
+import mailgen from 'mailgen'
 import nodemailer from 'nodemailer'
 
 export const transporterInstance = () => {
@@ -10,4 +11,52 @@ export const transporterInstance = () => {
       pass: process.env.EMAIL_PASSWORD || '', // Password (for gmail, your app password)
     },
   })
+}
+
+const mailGenerator = new mailgen({
+  theme: 'default',
+  product: {
+    // Appears in header & footer of e-mails
+    name: 'Mintegs',
+    link: `https://${process.env.DOMAIN}`,
+    // Optional product logo
+    // logo: 'https://mailgen.js/img/logo.png'
+  },
+})
+
+interface DataType {
+  intro: string
+  action: {
+    instructions?: string
+    buttonText: string
+  }
+  data: {
+    username: string
+    code: string
+  }
+}
+
+export const authTemplate = ({
+  intro,
+  action: { instructions = '', buttonText },
+  data: { username, code },
+}: DataType) => {
+  const response = {
+    body: {
+      name: username,
+      intro,
+      action: {
+        instructions,
+        button: {
+          color: '#22BC66', // Optional action button color
+          text: buttonText,
+          link: `https://auth.${process.env.DOMAIN}/verify-identity?code=${code}`,
+        },
+      },
+      // outro:
+      //   "Need help, or have questions? Just reply to this email, we'd love to help.",
+    },
+  }
+
+  return mailGenerator.generate(response)
 }
