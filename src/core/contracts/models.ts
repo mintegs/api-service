@@ -8,6 +8,7 @@ export declare interface Models {
   Session: SessionModel
   User: UserModel
   Verification: VerificationModel
+  Category: CategoryModel
 }
 
 export interface UserDocument extends Document {
