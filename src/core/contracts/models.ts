@@ -63,6 +63,11 @@ export interface VerificationDto {
   user: UserDocument
 }
 
+export interface CategoryDocument extends Document {
+  title: string
+}
+
 export type VerificationModel = Model<VerificationDocument>
 export type UserModel = Model<UserDocument>
 export type SessionModel = Model<SessionDocument>
+export type CategoryModel = Model<CategoryDocument>
