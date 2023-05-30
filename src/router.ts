@@ -10,10 +10,12 @@ import {
 const router: Router = express.Router()
 
 // middleware
+import authorizationMiddleware from './core/middleware/authorization.middleware'
 import validator from './core/middleware/validator'
 
 // Controllers
 import authController from './controllers/auth.controller'
+import userController from './controllers/user.controller'
 
 /** @define routes */
 // auth routes
@@ -28,5 +30,5 @@ router.get(
 )
 
 // user routes
-router.get('/user')
+router.get('/user', authorizationMiddleware, userController.information)
 export default router
