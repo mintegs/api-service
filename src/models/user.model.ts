@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose'
 import { device } from '../core/contracts/http'
 import { UserDocument } from '../core/contracts/models'
+import sessionRepository from '../core/repositories/session.repository'
 import { signToken } from '../core/utilities/jwt'
-import Session from './session.model'
 
 const userSchema = new Schema(
   {
@@ -89,13 +89,13 @@ userSchema.methods.generateSession = async function (
   })
 
   // Create new session
-  await new Session({
+  await sessionRepository.create({
     device,
-    expiryDate: new Date(new Date().setMilliseconds(31 * 24 * 60 * 60 * 1000)),
-    ip,
-    token,
     user: this.id,
-  }).save()
+    token,
+    ip,
+    expireDate: new Date(new Date().setMilliseconds(31 * 24 * 60 * 60 * 1000)),
+  })
 
   // Return jwt token
   return token

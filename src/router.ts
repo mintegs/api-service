@@ -27,4 +27,6 @@ router.get(
   authController.verifyIdentity
 )
 
+// user routes
+router.get('/user')
 export default router

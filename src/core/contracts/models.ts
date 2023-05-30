@@ -35,6 +35,14 @@ export interface UserDto {
   username: string
 }
 
+export interface SessionDto {
+  user: string
+  token: string
+  ip: string
+  device: device
+  expireDate: Date
+}
+
 export interface SessionDocument extends Document {
   expiryDate: Date
   ip: string
