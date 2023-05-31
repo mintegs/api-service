@@ -15,6 +15,7 @@ import validator from './core/middleware/validator'
 
 // Controllers
 import authController from './controllers/auth.controller'
+import categoryAdminController from './controllers/category.admin.controller'
 import userController from './controllers/user.controller'
 
 /** @define routes */
@@ -31,4 +32,33 @@ router.get(
 
 // user routes
 router.get('/user', authorizationMiddleware, userController.information)
+
+/** @define admin routes */
+// category routes
+router.get(
+  '/categories',
+  authorizationMiddleware,
+  categoryAdminController.findAll
+)
+router.get(
+  '/categories/:id',
+  authorizationMiddleware,
+  categoryAdminController.findOne
+)
+router.post(
+  '/categories',
+  authorizationMiddleware,
+  categoryAdminController.create
+)
+router.put(
+  '/categories/:id',
+  authorizationMiddleware,
+  categoryAdminController.update
+)
+router.delete(
+  '/categories/:id',
+  authorizationMiddleware,
+  categoryAdminController.delete
+)
+
 export default router
