@@ -66,6 +66,7 @@ export interface VerificationDto {
 
 export interface CategoryDocument extends Document {
   title: string
+  user: UserDocument
 }
 
 export interface CategoryDto {

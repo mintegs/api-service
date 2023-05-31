@@ -33,7 +33,7 @@ class CategoryAdminController extends BaseController {
 
   async create(req: CustomRequest, res: Response, next: NextFunction) {
     try {
-      await this.categoryAdminService.create(req.body)
+      await this.categoryAdminService.create(req.body, req.session.user.id)
       return this.sendResponse(res, 201)
     } catch (error) {
       next(error)

@@ -17,6 +17,7 @@ import validator from './core/middleware/validator'
 import authController from './controllers/auth.controller'
 import categoryAdminController from './controllers/category.admin.controller'
 import userController from './controllers/user.controller'
+import accessLevelMiddleware from './core/middleware/accessLevel.middleware'
 
 /** @define routes */
 // auth routes
@@ -38,16 +39,19 @@ router.get('/user', authorizationMiddleware, userController.information)
 router.get(
   '/categories',
   authorizationMiddleware,
+  accessLevelMiddleware('ADMIN'),
   categoryAdminController.findAll
 )
 router.get(
   '/categories/:id',
   authorizationMiddleware,
+  accessLevelMiddleware('ADMIN'),
   categoryAdminController.findOne
 )
 router.post(
   '/categories',
   authorizationMiddleware,
+  accessLevelMiddleware('ADMIN'),
   categoryAdminController.create
 )
 router.put(
@@ -58,6 +62,7 @@ router.put(
 router.delete(
   '/categories/:id',
   authorizationMiddleware,
+  accessLevelMiddleware('ADMIN'),
   categoryAdminController.delete
 )
 

@@ -8,6 +8,11 @@ const categorySchema = new Schema(
       type: String,
       unique: true,
     },
+    user: {
+      ref: 'User',
+      required: true,
+      type: Schema.Types.ObjectId,
+    },
   },
   { autoIndex: true, timestamps: true }
 )
