@@ -1,5 +1,6 @@
 import Category from '../../models/category.model'
 import { CategoryDocument, CategoryModel } from '../contracts/models'
+import { CategoryDto } from './../contracts/models'
 
 export class CategoryRepository {
   private categoryModel: CategoryModel
@@ -9,20 +10,18 @@ export class CategoryRepository {
   }
 
   async findAll(): Promise<CategoryDocument[]> {
-    return await this.categoryModel.find()
+    return await this.categoryModel.find().lean()
   }
 
   async findById(id: string): Promise<CategoryDocument> {
-    return await this.categoryModel.findById(id)
+    return await this.categoryModel.findById(id).lean()
   }
 
-  async create(data): Promise<void> {
-    await new this.categoryModel({
-      ...data,
-    })
+  async create(data: CategoryDto): Promise<void> {
+    await new this.categoryModel(data)
   }
 
-  async update(id: string, data): Promise<void> {
+  async update(id: string, data: CategoryDto): Promise<void> {
     await this.categoryModel.findByIdAndUpdate(id, { ...data })
   }
 
