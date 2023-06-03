@@ -1,8 +1,5 @@
-import * as dotenv from 'dotenv'
+import 'dotenv/config'
 import { start } from './main'
-
-// Setup dotenv config
-dotenv.config()
 
 // Run server
 start()
