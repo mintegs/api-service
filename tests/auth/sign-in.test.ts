@@ -45,7 +45,6 @@ it('returns a 200 when user is inactive and send verification code', async () =>
       email,
     })
     .expect(200)
-  //   console.log('res', email)
 
   await request(app)
     .post('/auth/sign-in')

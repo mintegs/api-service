@@ -279,7 +279,6 @@ export default class AuthService extends BaseService {
       // Otherwise, error 400
       throw ErrorMessage.badRequest()
     } catch (error) {
-      // console.log('error', error)
       throw error
     }
   }

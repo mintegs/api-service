@@ -41,7 +41,7 @@ export interface SessionDto {
   token: string
   ip: string
   device: device
-  expireDate: Date
+  expiryDate: Date
 }
 
 export interface SessionDocument extends Document {

@@ -19,10 +19,8 @@ export default async (
     if (token) {
       // Verify token
       const { id } = verifyToken(token)
-
       // Find session in mongodb with jwt token and user.id and populate user collection
       const session = await sessionRepository.findWithPopulate(id, token)
-
       // If exists, handle it
       if (session) {
         // If user status is suspended

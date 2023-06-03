@@ -94,7 +94,7 @@ userSchema.methods.generateSession = async function (
     user: this.id,
     token,
     ip,
-    expireDate: new Date(new Date().setMilliseconds(31 * 24 * 60 * 60 * 1000)),
+    expiryDate: new Date(new Date().setMilliseconds(31 * 24 * 60 * 60 * 1000)),
   })
 
   // Return jwt token

@@ -11,7 +11,7 @@ export class SessionRepository {
   async create(data: SessionDto): Promise<void> {
     await new this.sessionModel({
       ...data,
-    })
+    }).save()
   }
 
   async findWithPopulate(
