@@ -36,7 +36,7 @@ export const signInGithubSchema: AnyZodObject = z.object({
 })
 
 export const verifyIdentitySchema: AnyZodObject = z.object({
-  query: z.object({
+  params: z.object({
     code: z.string(),
   }),
 })

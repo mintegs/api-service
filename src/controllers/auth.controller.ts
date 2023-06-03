@@ -34,7 +34,7 @@ class AuthController extends BaseController {
 
   async signIn(req: CustomRequest, res: Response, next: NextFunction) {
     try {
-      await this.authService.signIn(req.body)
+      await this.authService.signIn(req.body.email)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)
@@ -82,13 +82,13 @@ class AuthController extends BaseController {
   }
 
   async verifyIdentity(
-    { query: { code }, device, ipAddress }: CustomRequest,
+    { params: { code }, device, ipAddress }: CustomRequest,
     res: Response,
     next: NextFunction
   ) {
     try {
       const token = await this.authService.verifyIdentity({
-        code: code as string,
+        code,
         ipAddress: ipAddress,
         device: device,
       })
