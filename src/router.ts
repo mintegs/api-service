@@ -14,8 +14,8 @@ import authorizationMiddleware from './core/middleware/authorization.middleware'
 import validator from './core/middleware/validator'
 
 // Controllers
+import categoryAdminController from './controllers/admin/category.admin.controller'
 import authController from './controllers/auth.controller'
-import categoryAdminController from './controllers/category.admin.controller'
 import userController from './controllers/user.controller'
 import accessLevelMiddleware from './core/middleware/accessLevel.middleware'
 

@@ -1,6 +1,6 @@
-import BaseService from '../core/contracts/baseService'
-import { CategoryDocument } from '../core/contracts/models'
-import { CategoryRepository } from '../core/repositories/category.repository'
+import BaseService from '../../core/contracts/baseService'
+import { CategoryDocument } from '../../core/contracts/models'
+import { CategoryRepository } from '../../core/repositories/category.repository'
 
 export default class CategoryAdminService extends BaseService {
   constructor(private readonly categoryRepository: CategoryRepository) {

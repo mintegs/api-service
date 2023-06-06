@@ -1,8 +1,8 @@
 import { NextFunction, Response } from 'express'
-import BaseController from '../core/contracts/baseController'
-import { CustomRequest } from '../core/contracts/http'
-import { CategoryRepository } from '../core/repositories/category.repository'
-import CategoryAdminService from '../services/category.admin.service'
+import BaseController from '../../core/contracts/baseController'
+import { CustomRequest } from '../../core/contracts/http'
+import { CategoryRepository } from '../../core/repositories/category.repository'
+import CategoryAdminService from '../../services/admin/category.admin.service'
 
 class CategoryAdminController extends BaseController {
   constructor(private readonly categoryAdminService: CategoryAdminService) {
