@@ -33,9 +33,7 @@ export default class Core {
     this.app.use(cookieParser())
     this.app.use(deviceMiddleware)
     this.app.use(ipMiddleware)
-    // this.app.use(
-    //   morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined')
-    // )
+    if (process.env.NODE_ENV === 'production') this.app.use(morgan('combined'))
 
     // router
     this.app.use('/', router)

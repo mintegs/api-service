@@ -31,18 +31,26 @@ class CategoryAdminController extends BaseController {
     }
   }
 
-  async create(req: CustomRequest, res: Response, next: NextFunction) {
+  async create(
+    { body: { title }, session }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      await this.categoryAdminService.create(req.body, req.session.user.id)
+      await this.categoryAdminService.create(title, session.user.id)
       return this.sendResponse(res, 201)
     } catch (error) {
       next(error)
     }
   }
 
-  async update(req: CustomRequest, res: Response, next: NextFunction) {
+  async update(
+    { params: { id }, body: { title } }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      await this.categoryAdminService.update(req.params.id, req.body)
+      await this.categoryAdminService.update(id, title)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)

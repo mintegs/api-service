@@ -1,11 +1,11 @@
 import * as express from 'express'
 import { Router } from 'express'
 import {
+  categoryDtoSchema,
   signInGithubSchema,
   signInGoogleSchema,
   signInSchema,
   signUpSchema,
-  verifyIdentitySchema,
 } from './core/lib/validation.schema'
 const router: Router = express.Router()
 
@@ -25,11 +25,7 @@ router.post('/auth/sign-up', validator(signUpSchema), authController.signUp)
 router.post('/auth/sign-in', validator(signInSchema), authController.signIn)
 router.get('/auth/google', validator(signInGoogleSchema), authController.google)
 router.get('/auth/github', validator(signInGithubSchema), authController.github)
-router.get(
-  '/auth/verify-identity/:code',
-  validator(verifyIdentitySchema),
-  authController.verifyIdentity
-)
+router.get('/auth/verify-identity/:code', authController.verifyIdentity)
 
 // user routes
 router.get('/user', authorizationMiddleware, userController.information)
@@ -37,30 +33,32 @@ router.get('/user', authorizationMiddleware, userController.information)
 /** @define admin routes */
 // category routes
 router.get(
-  '/categories',
+  '/admin/categories',
   authorizationMiddleware,
   accessLevelMiddleware('ADMIN'),
   categoryAdminController.findAll
 )
 router.get(
-  '/categories/:id',
+  '/admin/categories/:id',
   authorizationMiddleware,
   accessLevelMiddleware('ADMIN'),
   categoryAdminController.findOne
 )
 router.post(
-  '/categories',
+  '/admin/categories',
   authorizationMiddleware,
   accessLevelMiddleware('ADMIN'),
+  validator(categoryDtoSchema),
   categoryAdminController.create
 )
 router.put(
-  '/categories/:id',
+  '/admin/categories/:id',
   authorizationMiddleware,
+  validator(categoryDtoSchema),
   categoryAdminController.update
 )
 router.delete(
-  '/categories/:id',
+  '/admin/categories/:id',
   authorizationMiddleware,
   accessLevelMiddleware('ADMIN'),
   categoryAdminController.delete

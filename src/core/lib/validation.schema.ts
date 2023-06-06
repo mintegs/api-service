@@ -40,3 +40,12 @@ export const verifyIdentitySchema: AnyZodObject = z.object({
     code: z.string(),
   }),
 })
+
+export const categoryDtoSchema: AnyZodObject = z.object({
+  body: z.object({
+    title: z.string().max(25),
+  }),
+  params: z.object({
+    id: z.string().optional(),
+  }),
+})

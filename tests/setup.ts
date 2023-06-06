@@ -13,6 +13,7 @@ declare global {
   namespace NodeJS {
     interface Global {
       authorization(
+        role?: string,
         email?: string,
         username?: string
       ): Promise<{ token: string; user: string }>
@@ -46,8 +47,9 @@ afterAll(async () => {
 })
 
 global.authorization = async (
+  role?: string,
   email = faker.internet.email().toLowerCase(),
-  username = faker.internet.userName().toLowerCase()
+  username = faker.person.middleName().toLowerCase()
 ) => {
   await request(app)
     .post('/auth/sign-up')
@@ -60,6 +62,12 @@ global.authorization = async (
   const user = await mongoose.connection
     .collection('users')
     .findOne({ email: email.toLowerCase(), username: username.toLowerCase() })
+
+  if (role) {
+    await mongoose.connection
+      .collection('users')
+      .findOneAndUpdate({ _id: user?._id }, { $set: { role } })
+  }
 
   const verifyCode = await mongoose.connection
     .collection('verifications')

@@ -20,7 +20,7 @@ export class CategoryRepository {
     await new this.categoryModel({
       title,
       user,
-    })
+    }).save()
   }
 
   async update(id: string, title: string): Promise<void> {

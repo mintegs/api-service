@@ -1,5 +1,5 @@
 import BaseService from '../core/contracts/baseService'
-import { CategoryDocument, UserDocument } from '../core/contracts/models'
+import { CategoryDocument } from '../core/contracts/models'
 import { CategoryRepository } from '../core/repositories/category.repository'
 
 export default class CategoryAdminService extends BaseService {
@@ -23,9 +23,9 @@ export default class CategoryAdminService extends BaseService {
     }
   }
 
-  async create(title: string, user: UserDocument): Promise<void> {
+  async create(title: string, user: string): Promise<void> {
     try {
-      await this.categoryRepository.create(title, user.id)
+      await this.categoryRepository.create(title, user)
     } catch (error) {
       throw error
     }
