@@ -19,12 +19,12 @@ class SessionUserController extends BaseController {
   }
 
   async delete(
-    { params: { id } }: CustomRequest,
+    { params: { id }, session }: CustomRequest,
     res: Response,
     next: NextFunction
   ) {
     try {
-      await this.sessionUserService.delete(id)
+      await this.sessionUserService.delete(id, session.user.id)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)

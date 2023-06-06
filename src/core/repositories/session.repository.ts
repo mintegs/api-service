@@ -36,8 +36,11 @@ export class SessionRepository {
     })
   }
 
-  async delete(id: string): Promise<void> {
-    await this.sessionModel.findByIdAndDelete(id)
+  async delete(id: string, user: string): Promise<void> {
+    await this.sessionModel.findOneAndDelete({
+      id,
+      user,
+    })
   }
 }
 

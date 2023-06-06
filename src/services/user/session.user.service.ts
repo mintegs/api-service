@@ -15,9 +15,9 @@ export default class SessionUserService extends BaseService {
     }
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string, userId): Promise<void> {
     try {
-      await this.sessionRepository.delete(id)
+      await this.sessionRepository.delete(id, userId)
     } catch (error) {
       throw error
     }
