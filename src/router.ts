@@ -16,7 +16,8 @@ import validator from './core/middleware/validator'
 // Controllers
 import categoryAdminController from './controllers/admin/category.admin.controller'
 import authController from './controllers/auth.controller'
-import userController from './controllers/user.controller'
+import currentUserController from './controllers/current.user.controller'
+import sessionUserController from './controllers/user/session.user.controller'
 import accessLevelMiddleware from './core/middleware/accessLevel.middleware'
 
 /** @define routes */
@@ -28,7 +29,17 @@ router.get('/auth/github', validator(signInGithubSchema), authController.github)
 router.get('/auth/verify-identity/:code', authController.verifyIdentity)
 
 // user routes
-router.get('/user', authorizationMiddleware, userController.information)
+router.get('/user', authorizationMiddleware, currentUserController.information)
+router.get(
+  '/user/sessions',
+  authorizationMiddleware,
+  sessionUserController.findAll
+)
+router.delete(
+  '/user/sessions/:id',
+  authorizationMiddleware,
+  sessionUserController.delete
+)
 
 /** @define admin routes */
 // category routes

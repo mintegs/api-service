@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express'
 import BaseController from '../core/contracts/baseController'
 import { CustomRequest } from '../core/contracts/http'
 
-class UserController extends BaseController {
+class CurrentUserController extends BaseController {
   constructor() {
     super()
   }
@@ -16,4 +16,4 @@ class UserController extends BaseController {
   }
 }
 
-export default new UserController()
+export default new CurrentUserController()

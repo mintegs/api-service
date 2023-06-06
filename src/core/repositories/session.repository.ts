@@ -29,6 +29,16 @@ export class SessionRepository {
         select: '-status',
       })
   }
+
+  async findAll(user: string): Promise<SessionDocument[]> {
+    return await this.sessionModel.find({
+      user,
+    })
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.sessionModel.findByIdAndDelete(id)
+  }
 }
 
 export default new SessionRepository()
