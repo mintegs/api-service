@@ -24,7 +24,8 @@ class SessionUserController extends BaseController {
     next: NextFunction
   ) {
     try {
-      await this.sessionUserService.delete(id, session.user.id)
+      if (id !== session.id)
+        await this.sessionUserService.delete(id, session.user.id)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)
