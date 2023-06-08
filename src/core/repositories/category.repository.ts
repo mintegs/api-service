@@ -24,11 +24,11 @@ export class CategoryRepository {
   }
 
   async update(id: string, title: string): Promise<void> {
-    await this.categoryModel.findByIdAndUpdate(id, { title })
+    await this.categoryModel.findByIdAndUpdate(id, { title }).lean()
   }
 
   async delete(id: string): Promise<void> {
-    await this.categoryModel.findByIdAndDelete(id)
+    await this.categoryModel.findByIdAndDelete(id).lean()
   }
 }
 

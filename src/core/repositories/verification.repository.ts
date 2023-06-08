@@ -29,7 +29,7 @@ export class VerificationRepository {
     }).save()
   }
 
-  async find(code: string): Promise<VerificationDocument | null> {
+  async findOne(code: string): Promise<VerificationDocument | null> {
     return await this.verificationModel
       .findOne({
         code,

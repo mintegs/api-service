@@ -31,16 +31,20 @@ export class SessionRepository {
   }
 
   async findAll(user: string): Promise<SessionDocument[]> {
-    return await this.sessionModel.find({
-      user,
-    })
+    return await this.sessionModel
+      .find({
+        user,
+      })
+      .lean()
   }
 
   async delete(id: string, user: string): Promise<void> {
-    await this.sessionModel.findOneAndDelete({
-      _id: id,
-      user,
-    })
+    await this.sessionModel
+      .findOneAndDelete({
+        _id: id,
+        user,
+      })
+      .lean()
   }
 }
 

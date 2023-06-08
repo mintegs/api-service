@@ -257,7 +257,7 @@ export default class AuthService extends BaseService {
   }): Promise<string> {
     try {
       // Find verification
-      const verification = await this.verificationRepository.find(code)
+      const verification = await this.verificationRepository.findOne(code)
 
       // If find verification, handle it
       if (verification) {
