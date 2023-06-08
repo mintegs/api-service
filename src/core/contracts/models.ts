@@ -2,7 +2,8 @@ import { Document, Model } from 'mongoose'
 import { device } from './http'
 
 export type Role = undefined | 'ADMIN'
-export type Status = 'INACTIVE' | 'ACTIVE' | 'SUSPENDED'
+export type UserStatus = 'INACTIVE' | 'ACTIVE' | 'SUSPENDED'
+export type ArticleStatus = 'INACTIVE' | 'ACTIVE'
 
 export declare interface Models {
   Session: SessionModel
@@ -19,7 +20,7 @@ export interface UserDocument extends Document {
   job?: string
   name?: string
   role: Role
-  status: Status
+  status: UserStatus
   username: string
   generateSession: (ip: string, device: device) => Promise<string>
 }
@@ -32,7 +33,7 @@ export interface UserDto {
   job?: string
   name?: string
   role?: Role
-  status?: Status
+  status?: UserStatus
   username: string
 }
 
@@ -66,6 +67,16 @@ export interface VerificationDto {
 
 export interface CategoryDocument extends Document {
   title: string
+  user: UserDocument
+}
+
+export interface ArticleDocument extends Document {
+  title: string
+  summery: string
+  image: string
+  status: ArticleStatus
+  content: string
+  category: CategoryDocument
   user: UserDocument
 }
 
