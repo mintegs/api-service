@@ -88,3 +88,4 @@ export type VerificationModel = Model<VerificationDocument>
 export type UserModel = Model<UserDocument>
 export type SessionModel = Model<SessionDocument>
 export type CategoryModel = Model<CategoryDocument>
+export type ArticleModel = Model<ArticleDocument>
