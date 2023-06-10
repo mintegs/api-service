@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose'
 import { CategoryDocument } from '../core/contracts/models'
+import { ErrorMessage } from '../core/lib/errorMessage'
 
 const categorySchema = new Schema(
   {
@@ -16,6 +17,12 @@ const categorySchema = new Schema(
   },
   { autoIndex: true, timestamps: true }
 )
+
+categorySchema.post('save', function (error, doc, next) {
+  if (error.code === 11000)
+    throw ErrorMessage.setter('Invalid Data', 'Title is already', 422)
+  else next()
+})
 
 const Category = model<CategoryDocument>('Category', categorySchema)
 

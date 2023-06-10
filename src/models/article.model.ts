@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import { ArticleDocument } from '../core/contracts/models'
+import { ErrorMessage } from '../core/lib/errorMessage'
 
 const articleSchema = new Schema(
   {
@@ -41,6 +42,12 @@ const articleSchema = new Schema(
     timestamps: true,
   }
 )
+
+articleSchema.post('save', function (error, doc, next) {
+  if (error.code === 11000)
+    throw ErrorMessage.setter('Invalid Data', 'Title is already', 422)
+  else next()
+})
 
 const Article = mongoose.model<ArticleDocument>('Article', articleSchema)
 
