@@ -84,6 +84,12 @@ export interface CategoryDto {
   title: string
 }
 
+export interface CategoryFilter {
+  _id?: string
+  title?: string
+  user?: string
+}
+
 export type VerificationModel = Model<VerificationDocument>
 export type UserModel = Model<UserDocument>
 export type SessionModel = Model<SessionDocument>

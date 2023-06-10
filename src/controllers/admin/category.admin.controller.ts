@@ -20,9 +20,13 @@ class CategoryAdminController extends BaseController {
     }
   }
 
-  async findOne(req: CustomRequest, res: Response, next: NextFunction) {
+  async findOne(
+    { params: { id } }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      const category = await this.categoryAdminService.findOne(req.params.id)
+      const category = await this.categoryAdminService.findOne({ _id: id })
       return this.sendResponse(res, 200, {
         category,
       })

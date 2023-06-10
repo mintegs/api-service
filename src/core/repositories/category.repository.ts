@@ -1,5 +1,9 @@
 import Category from '../../models/category.model'
-import { CategoryDocument, CategoryModel } from '../contracts/models'
+import {
+  CategoryDocument,
+  CategoryFilter,
+  CategoryModel,
+} from '../contracts/models'
 
 export class CategoryRepository {
   private categoryModel: CategoryModel
@@ -8,16 +12,12 @@ export class CategoryRepository {
     this.categoryModel = Category
   }
 
-  async findAll(): Promise<CategoryDocument[]> {
-    return await this.categoryModel.find().lean()
-  }
-
-  async findOne(filter: any): Promise<CategoryDocument[]> {
+  async findAll(filter?: CategoryFilter): Promise<CategoryDocument[]> {
     return await this.categoryModel.find({ ...filter }).lean()
   }
 
-  async findById(id: string): Promise<CategoryDocument> {
-    return await this.categoryModel.findById(id).lean()
+  async findOne(filter: CategoryFilter): Promise<CategoryDocument> {
+    return await this.categoryModel.findOne({ ...filter }).lean()
   }
 
   async create(title: string, user: string): Promise<void> {

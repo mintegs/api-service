@@ -1,5 +1,5 @@
 import BaseService from '../../core/contracts/baseService'
-import { CategoryDocument } from '../../core/contracts/models'
+import { CategoryDocument, CategoryFilter } from '../../core/contracts/models'
 import { CategoryRepository } from '../../core/repositories/category.repository'
 
 export default class CategoryAdminService extends BaseService {
@@ -7,17 +7,17 @@ export default class CategoryAdminService extends BaseService {
     super()
   }
 
-  async findAll(): Promise<CategoryDocument[]> {
+  async findAll(filter?: CategoryFilter): Promise<CategoryDocument[]> {
     try {
-      return await this.categoryRepository.findAll()
+      return await this.categoryRepository.findAll(filter)
     } catch (error) {
       throw error
     }
   }
 
-  async findOne(id: string): Promise<CategoryDocument> {
+  async findOne(filter: CategoryFilter): Promise<CategoryDocument> {
     try {
-      return await this.categoryRepository.findById(id)
+      return await this.categoryRepository.findOne(filter)
     } catch (error) {
       throw error
     }
