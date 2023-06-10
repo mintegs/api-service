@@ -8,8 +8,8 @@ export class ArticleRepository {
     this.articleModel = Article
   }
 
-  async findAll(): Promise<ArticleDocument[]> {
-    return await this.articleModel.find().lean()
+  async findAll(filter?: any): Promise<ArticleDocument[]> {
+    return await this.articleModel.find({ ...filter }).lean()
   }
 
   async findById(id: string): Promise<ArticleDocument> {

@@ -9,6 +9,7 @@ import { categoryDtoSchema } from '../core/lib/validation.schema'
 import validator from '../core/middleware/validator'
 
 // controller
+import articleAdminController from '../controllers/admin/article.admin.controller'
 import categoryAdminController from '../controllers/admin/category.admin.controller'
 
 // routes
@@ -25,5 +26,7 @@ adminRouter.put(
   categoryAdminController.update
 )
 adminRouter.delete('/categories/:id', categoryAdminController.delete)
+adminRouter.get('/articles', articleAdminController.findAll)
+adminRouter.get('/articles/:id', articleAdminController.findOne)
 
 export default adminRouter
