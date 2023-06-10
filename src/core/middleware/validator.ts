@@ -33,11 +33,7 @@ export default (schema: AnyZodObject) =>
 
       // Return error
       next(
-        ErrorMessage.setter(
-          'Invalid Data',
-          message.replace(/\s\s+/g, ' ').toLowerCase(),
-          422
-        )
+        ErrorMessage.setter('Invalid Data', message.replace(/\s\s+/g, ' '), 422)
       )
     }
   }

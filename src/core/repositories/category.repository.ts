@@ -12,6 +12,10 @@ export class CategoryRepository {
     return await this.categoryModel.find().lean()
   }
 
+  async findOne(filter: any): Promise<CategoryDocument[]> {
+    return await this.categoryModel.find({ ...filter }).lean()
+  }
+
   async findById(id: string): Promise<CategoryDocument> {
     return await this.categoryModel.findById(id).lean()
   }
