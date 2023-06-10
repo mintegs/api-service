@@ -49,18 +49,26 @@ it('GET /admin/categories/:id', async () => {
 
 it('POST /admin/categories', async () => {
   const { token } = await global.authorization('ADMIN')
-
+  const title = faker.word.words({ count: 1 })
   await request(app)
     .post('/admin/categories')
     .set('authorization', token)
     .send({
-      title: faker.word.words({ count: 1 }),
+      title,
     })
     .expect(201)
 
   expect(
     await mongoose.connection.collection('categories').countDocuments()
   ).toEqual(1)
+
+  await request(app)
+    .post('/admin/categories')
+    .set('authorization', token)
+    .send({
+      title,
+    })
+    .expect(422)
 })
 
 it('PUT /admin/categories/:id', async () => {
