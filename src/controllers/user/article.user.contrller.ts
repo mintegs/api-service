@@ -15,7 +15,9 @@ class ArticleUserController extends BaseController {
     next: NextFunction
   ) {
     try {
-      const articles = await this.articleUserService.findAll(user.id)
+      const articles = await this.articleUserService.findAll({
+        user: user.id,
+      })
       return this.sendResponse(res, 200, { articles })
     } catch (error) {
       next(error)

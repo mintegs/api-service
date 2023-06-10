@@ -1,5 +1,11 @@
 import Article from '../../models/article.model'
-import { ArticleDocument, ArticleModel } from '../contracts/models'
+import {
+  ArticleDocument,
+  ArticleFilter,
+  ArticleModel,
+  CategoryDocument,
+  UserDocument,
+} from '../contracts/models'
 
 export class ArticleRepository {
   private articleModel: ArticleModel
@@ -8,12 +14,26 @@ export class ArticleRepository {
     this.articleModel = Article
   }
 
-  async findAll(filter?: any): Promise<ArticleDocument[]> {
-    return await this.articleModel.find({ ...filter }).lean()
+  async findAll(filter?: ArticleFilter): Promise<ArticleDocument[]> {
+    return await this.articleModel
+      .find({ ...filter })
+      .populate<{ user: UserDocument; category: CategoryDocument }>([
+        { path: 'user', select: 'username -_id' },
+        { path: 'category', select: 'title -_id' },
+      ])
+      .select('title')
+      .sort('-createdAt')
+      .lean()
   }
 
-  async findById(id: string): Promise<ArticleDocument> {
-    return await this.articleModel.findById(id).lean()
+  async findOne(filter: ArticleFilter): Promise<ArticleDocument> {
+    return await this.articleModel
+      .findOne({ ...filter })
+      .populate<{ user: UserDocument; category: CategoryDocument }>([
+        { path: 'user', select: 'username -_id' },
+        { path: 'category', select: 'title -_id' },
+      ])
+      .lean()
   }
 
   async create(data: any): Promise<void> {

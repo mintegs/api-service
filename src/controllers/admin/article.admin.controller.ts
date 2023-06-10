@@ -20,9 +20,13 @@ class ArticleAdminController extends BaseController {
     }
   }
 
-  async findOne(req: CustomRequest, res: Response, next: NextFunction) {
+  async findOne(
+    { params: { id } }: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      const article = await this.articleAdminService.findOne(req.params.id)
+      const article = await this.articleAdminService.findOne({ _id: id })
       return this.sendResponse(res, 200, {
         article,
       })

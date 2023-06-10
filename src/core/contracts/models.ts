@@ -90,6 +90,13 @@ export interface CategoryFilter {
   user?: string
 }
 
+export interface ArticleFilter {
+  _id?: string
+  title?: string
+  user?: string
+  category?: string
+}
+
 export type VerificationModel = Model<VerificationDocument>
 export type UserModel = Model<UserDocument>
 export type SessionModel = Model<SessionDocument>

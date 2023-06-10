@@ -1,5 +1,5 @@
 import BaseService from '../../core/contracts/baseService'
-import { ArticleDocument } from '../../core/contracts/models'
+import { ArticleDocument, ArticleFilter } from '../../core/contracts/models'
 import { ArticleRepository } from '../../core/repositories/article.repository'
 
 export default class ArticleUserService extends BaseService {
@@ -7,9 +7,9 @@ export default class ArticleUserService extends BaseService {
     super()
   }
 
-  async findAll(user: string): Promise<ArticleDocument[]> {
+  async findAll(filter: ArticleFilter): Promise<ArticleDocument[]> {
     try {
-      return await this.articleRepository.findAll({ user })
+      return await this.articleRepository.findAll(filter)
     } catch (error) {
       throw error
     }

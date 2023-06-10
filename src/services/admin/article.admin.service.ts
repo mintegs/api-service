@@ -1,5 +1,5 @@
 import BaseService from '../../core/contracts/baseService'
-import { ArticleDocument } from '../../core/contracts/models'
+import { ArticleDocument, ArticleFilter } from '../../core/contracts/models'
 import { ArticleRepository } from '../../core/repositories/article.repository'
 
 export default class ArticleAdminService extends BaseService {
@@ -7,17 +7,17 @@ export default class ArticleAdminService extends BaseService {
     super()
   }
 
-  async findAll(): Promise<ArticleDocument[]> {
+  async findAll(filter?: ArticleFilter): Promise<ArticleDocument[]> {
     try {
-      return await this.articleRepository.findAll()
+      return await this.articleRepository.findAll(filter)
     } catch (error) {
       throw error
     }
   }
 
-  async findOne(id: string): Promise<ArticleDocument> {
+  async findOne(filter: ArticleFilter): Promise<ArticleDocument> {
     try {
-      return await this.articleRepository.findById(id)
+      return await this.articleRepository.findOne(filter)
     } catch (error) {
       throw error
     }
