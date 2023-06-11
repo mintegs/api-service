@@ -10,10 +10,6 @@ const articleSchema = new Schema(
       unique: true,
       lowercase: true,
     },
-    summery: {
-      type: String,
-      required: true,
-    },
     content: {
       type: String,
       required: true,

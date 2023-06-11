@@ -72,7 +72,6 @@ export interface CategoryDocument extends Document {
 
 export interface ArticleDocument extends Document {
   title: string
-  summery: string
   image: string
   status: ArticleStatus
   content: string
