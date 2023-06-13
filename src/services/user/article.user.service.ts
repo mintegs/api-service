@@ -26,17 +26,20 @@ export default class ArticleUserService extends BaseService {
     }
   }
 
-  async update(id: string, data: any): Promise<void> {
+  async update(
+    query: { title: string; user: string },
+    data: any
+  ): Promise<void> {
     try {
-      await this.articleRepository.update(id, data)
+      await this.articleRepository.update(query, data)
     } catch (error) {
       throw error
     }
   }
 
-  async delete(id: string, user: string): Promise<void> {
+  async delete(title: string, user: string): Promise<void> {
     try {
-      await this.articleRepository.delete(id, user)
+      await this.articleRepository.delete(title, user)
     } catch (error) {
       throw error
     }

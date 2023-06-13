@@ -17,11 +17,15 @@ export class ArticleRepository {
   async findAll(filter?: ArticleFilter): Promise<ArticleDocument[]> {
     return await this.articleModel
       .find({ ...filter })
-      .populate<{ user: UserDocument; category: CategoryDocument }>([
-        { path: 'user', select: 'username -_id' },
-        { path: 'category', select: 'title -_id' },
-      ])
-      .select('title')
+      .populate<{ user: UserDocument }>({
+        path: 'user',
+        select: 'username -_id',
+      })
+      .populate<{ category: CategoryDocument }>({
+        path: 'category',
+        select: 'title -_id',
+      })
+      .select('title image content -_id')
       .sort('-createdAt')
       .lean()
   }
@@ -42,14 +46,17 @@ export class ArticleRepository {
     }).save()
   }
 
-  async update(id: string, data: any): Promise<void> {
-    await this.articleModel.findByIdAndUpdate(id, { ...data }).lean()
+  async update(
+    query: { title: string; user: string },
+    data: any
+  ): Promise<void> {
+    await this.articleModel.findOneAndUpdate({ ...query }, { ...data }).lean()
   }
 
-  async delete(id: string, user: string): Promise<void> {
+  async delete(title: string, user: string): Promise<void> {
     await this.articleModel
       .findOneAndDelete({
-        _id: id,
+        title,
         user,
       })
       .lean()

@@ -1,4 +1,5 @@
 import { AnyZodObject, z } from 'zod'
+import { existingArticleStatus } from '../contracts/validation'
 
 export const signUpSchema: AnyZodObject = z.object({
   body: z.object({
@@ -43,9 +44,26 @@ export const verifyIdentitySchema: AnyZodObject = z.object({
 
 export const categoryDtoSchema: AnyZodObject = z.object({
   body: z.object({
-    title: z.string().max(25),
+    title: z.string().max(25).toLowerCase(),
   }),
   params: z.object({
     id: z.string().optional(),
+  }),
+})
+
+export const articleDtoSchema: AnyZodObject = z.object({
+  body: z.object({
+    title: z.string().max(30).toLowerCase(),
+    content: z.string(),
+    image: z.string(),
+    category: z.string(),
+    status: z
+      .custom((value) => existingArticleStatus(value), {
+        message: 'Invalid status',
+      })
+      .optional(),
+  }),
+  params: z.object({
+    title: z.string().toLowerCase().optional(),
   }),
 })

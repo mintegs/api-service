@@ -24,8 +24,8 @@ declare global {
 let mongod: MongoMemoryServer
 beforeAll(async () => {
   process.env.JWT_KEY = 'jwtKey'
-  process.env.EMAIL_PASSWORD = 'niujalerjhkdpncw1'
-  process.env.EMAIL_USER = 'mohamadresaaa@gmail.com1'
+  process.env.EMAIL_PASSWORD = 'niujalerjhkdpncw1hgfh'
+  process.env.EMAIL_USER = 'mohamadresaaa@gmail.com1hgfh'
 
   mongod = await MongoMemoryServer.create()
   const mongoUri = mongod.getUri()

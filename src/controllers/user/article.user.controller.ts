@@ -38,12 +38,12 @@ class ArticleUserController extends BaseController {
   }
 
   async update(
-    { body, params: { id } }: CustomRequest,
+    { body, params: { title }, session: { user } }: CustomRequest,
     res: Response,
     next: NextFunction
   ) {
     try {
-      await this.articleUserService.update(id, body)
+      await this.articleUserService.update({ title, user: user.id }, body)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)
@@ -51,12 +51,12 @@ class ArticleUserController extends BaseController {
   }
 
   async delete(
-    { params: { id }, session: { user } }: CustomRequest,
+    { params: { title }, session: { user } }: CustomRequest,
     res: Response,
     next: NextFunction
   ) {
     try {
-      await this.articleUserService.delete(id, user.id)
+      await this.articleUserService.delete(title, user.id)
       return this.sendResponse(res, 200)
     } catch (error) {
       next(error)
