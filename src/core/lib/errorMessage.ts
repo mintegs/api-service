@@ -1,3 +1,5 @@
+import i18n from './i18n'
+
 let instance = null
 
 export class ErrorMessage extends Error {
@@ -79,7 +81,7 @@ export class PublicErrorMessage {
 
   get withOutStatus() {
     return {
-      message: this.message,
+      message: i18n.__(this.message),
       properties: this.properties,
     }
   }

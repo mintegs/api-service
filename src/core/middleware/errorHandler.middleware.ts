@@ -1,5 +1,6 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import { ErrorMessage, PublicErrorMessage } from '../lib/errorMessage'
+import i18n from '../lib/i18n'
 
 export const errorHandler: ErrorRequestHandler = (
   error: ErrorMessage,
@@ -9,7 +10,7 @@ export const errorHandler: ErrorRequestHandler = (
 ) => {
   if (process.env.NODE_ENV !== 'production') {
     res.status(error.status ? error.status : 500).json({
-      message: error.message,
+      message: i18n.__(error.message),
       stack: error.stack,
     })
   } else {
