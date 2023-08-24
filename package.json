@@ -14,7 +14,6 @@
     "start": "node dist",
     "build": "tsc",
     "prettier": "prettier -w ./",
-    "prepare": "husky install",
     "test": "jest --watchAll --no-cache --runInBand --detectOpenHandles"
   },
   "keywords": [],
