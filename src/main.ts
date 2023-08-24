@@ -5,8 +5,9 @@ import Core from './core'
 const core = new Core()
 
 export const start = async () => {
+  const port = process.env.PORT
   // Running server
-  await createServer(core.getApp()).listen(process.env.PORT, () =>
-    console.log('server is running')
+  await createServer(core.getApp()).listen(port, () =>
+    console.log(`server is running on ${port}`)
   )
 }
