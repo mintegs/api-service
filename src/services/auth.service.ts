@@ -141,15 +141,17 @@ export default class AuthService extends BaseService {
     try {
       // Get access_token and id_token
       const { access_token, id_token } = await getGoogleTokens(code)
+      console.log('access_token', access_token)
+      console.log('id_token', id_token)
 
       // Get user information from google
-      const { email } = await getGoogleUser({
+      const data = await getGoogleUser({
         access_token,
         id_token,
       })
-      console.log('email', email)
+      console.log('data', data)
       // Find user
-      const user = await this.userRepository.findByEmailOrUsername(email)
+      const user = await this.userRepository.findByEmailOrUsername(data.email)
 
       // If existing user, handle it
       if (user) {
@@ -173,7 +175,7 @@ export default class AuthService extends BaseService {
       } else {
         // Otherwise create new user
         const newUser = await this.userRepository.create({
-          email,
+          email: data.email,
           username:
             'user' +
             Math.floor(123456789 + Math.random() * 987654321).toString(),
@@ -185,7 +187,6 @@ export default class AuthService extends BaseService {
         return await newUser.generateSession(ipAddress, device)
       }
     } catch (error) {
-      console.log('google service')
       throw error
     }
   }
