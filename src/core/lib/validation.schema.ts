@@ -23,7 +23,7 @@ export const signInSchema: AnyZodObject = z.object({
 export const signInGoogleSchema: AnyZodObject = z.object({
   query: z.object({
     scope: z.string(),
-    authuser: z.string(),
+    authuser: z.string().optional(),
     prompt: z.string(),
     code: z.string(),
   }),
