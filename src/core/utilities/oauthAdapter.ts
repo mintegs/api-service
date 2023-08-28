@@ -72,6 +72,7 @@ export const getGoogleTokens = async (
 
     return data
   } catch (error) {
+    console.log('getGoogleTokens')
     throw error
   }
 }
@@ -101,6 +102,7 @@ export const getGoogleUser = async ({
     )
     return data
   } catch (error) {
+    console.log('getGoogleUser')
     throw error
   }
 }
