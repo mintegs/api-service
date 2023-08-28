@@ -13,7 +13,7 @@ export const start = async () => {
     console.log('Database connected')
 
     // Running server
-    const port = process.env.PO
+    const port = process.env.PORT
     await createServer(core.getApp()).listen(port, () =>
       console.log(`Server is running on ${port}`)
     )
