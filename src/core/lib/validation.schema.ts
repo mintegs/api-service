@@ -24,7 +24,7 @@ export const signInGoogleSchema: AnyZodObject = z.object({
   query: z.object({
     scope: z.string(),
     authuser: z.string().optional(),
-    prompt: z.string(),
+    prompt: z.string().optional(),
     code: z.string(),
   }),
 })
