@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=7.26.3",
-    "yarn": ">=1",
+    "yarn": "please-use-pnpm",
     "npm": "please-use-pnpm"
   },
   "scripts": {
@@ -14,6 +14,7 @@
     "start": "node dist",
     "build": "tsc",
     "prettier": "prettier -w ./",
+    "prepare": "husky install",
     "test": "jest --watchAll --no-cache --runInBand --detectOpenHandles"
   },
   "keywords": [],

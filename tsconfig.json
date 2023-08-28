@@ -5,8 +5,7 @@
     "outDir": "dist",
     "sourceMap": false,
     "esModuleInterop": true,
-    "moduleResolution": "Node16",
-    "lib": ["dom", "dom.iterable", "es2019"]
+    "moduleResolution": "Node16"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
