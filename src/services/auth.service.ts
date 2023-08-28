@@ -147,7 +147,7 @@ export default class AuthService extends BaseService {
         access_token,
         id_token,
       })
-
+      console.log('email', email)
       // Find user
       const user = await this.userRepository.findByEmailOrUsername(email)
 
@@ -185,6 +185,7 @@ export default class AuthService extends BaseService {
         return await newUser.generateSession(ipAddress, device)
       }
     } catch (error) {
+      console.log('google service')
       throw error
     }
   }
