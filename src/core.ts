@@ -25,7 +25,11 @@ export default class Core {
      * @private
      * @package cors, compression, helmet, body-parser, morgan
      */
-    this.app.use(cors())
+    this.app.use(
+      cors({
+        origin: '*',
+      })
+    )
     this.app.use(compression())
     this.app.use(helmet())
     this.app.use(bodyParser.urlencoded({ extended: true }))
