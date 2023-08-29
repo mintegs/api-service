@@ -27,7 +27,10 @@ export default class Core {
      */
     this.app.use(
       cors({
-        origin: '*',
+        origin: (origin, callback) => {
+          console.log('origin', origin)
+          callback(null, true)
+        },
       })
     )
     this.app.use(compression())
