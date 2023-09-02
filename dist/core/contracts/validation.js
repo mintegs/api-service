@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.existingArticleStatus = exports.existingUserStatus = exports.existingRole = void 0;
+const roles = ['ADMIN'];
+const existingRole = (value) => roles.includes(value);
+exports.existingRole = existingRole;
+const userStatus = ['INACTIVE', 'ACTIVE', 'SUSPENDED'];
+const existingUserStatus = (value) => userStatus.includes(value);
+exports.existingUserStatus = existingUserStatus;
+const articleStatus = ['INACTIVE', 'ACTIVE'];
+const existingArticleStatus = (value) => articleStatus.includes(value);
+exports.existingArticleStatus = existingArticleStatus;
