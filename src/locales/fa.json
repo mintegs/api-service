@@ -1,1 +1,10 @@
-{}
+{
+	"Title is already": "Title is already",
+	"status Invalid status": "status Invalid status",
+	"email Required": "email Required",
+	"email Invalid email": "email Invalid email",
+	"Email is already": "Email is already",
+	"Username is already": "Username is already",
+	"The specified Resource does not exist": "The specified Resource does not exist",
+	"username must contain at most 25 character(s)": "username must contain at most 25 character(s)"
+}

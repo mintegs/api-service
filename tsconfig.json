@@ -5,7 +5,7 @@
     "outDir": "dist",
     "sourceMap": false,
     "esModuleInterop": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node16"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

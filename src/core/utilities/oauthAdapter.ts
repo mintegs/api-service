@@ -60,7 +60,7 @@ export const getGoogleTokens = async (
         code,
         client_id: process.env.GOOGLE_CLIENT_ID || '',
         client_secret: process.env.GOOGLE_SECRET || '',
-        redirect_uri: `https://auth.${process.env.DOMAIN}/sign-in-google`,
+        redirect_uri: `https://api.${process.env.DOMAIN}/auth/google`,
         grant_type: 'authorization_code',
       },
       {

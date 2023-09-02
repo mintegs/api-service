@@ -38,8 +38,8 @@ export default async (
       }
     }
 
-    return res.end()
+    throw ErrorMessage.setter('Unauthorized', 'Authentication failed', 401)
   } catch (error) {
-    return res.end()
+    throw error
   }
 }
