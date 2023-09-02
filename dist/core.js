@@ -26,9 +26,9 @@ class Core {
          */
         this.app.use((0, cors_1.default)({
             origin: (origin, callback) => {
-                console.log('origin', origin);
                 callback(null, true);
             },
+            credentials: true,
         }));
         this.app.use((0, compression_1.default)());
         this.app.use((0, helmet_1.default)());
