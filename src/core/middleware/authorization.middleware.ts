@@ -40,6 +40,6 @@ export default async (
 
     throw ErrorMessage.setter('Unauthorized', 'Authentication failed', 401)
   } catch (error) {
-    throw error
+    next(error)
   }
 }

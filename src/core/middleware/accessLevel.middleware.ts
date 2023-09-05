@@ -10,6 +10,6 @@ export default (role: Role) => {
     }
 
     // Otherwise return error
-    throw ErrorMessage.setter('Access denied', 'Authentication failed', 403)
+    next(ErrorMessage.setter('Access denied', 'Authentication failed', 403))
   }
 }
