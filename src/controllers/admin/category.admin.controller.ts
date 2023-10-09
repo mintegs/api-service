@@ -41,8 +41,11 @@ class CategoryAdminController extends BaseController {
     next: NextFunction
   ) {
     try {
-      await this.categoryAdminService.create(title, session.user.id)
-      return this.sendResponse(res, 201)
+      const newCategory = await this.categoryAdminService.create(
+        title,
+        session.user.id
+      )
+      return this.sendResponse(res, 201, newCategory)
     } catch (error) {
       next(error)
     }

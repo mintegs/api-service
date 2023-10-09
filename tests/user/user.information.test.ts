@@ -4,9 +4,9 @@ import core from '../../src/core'
 const app = new core().getApp()
 
 it('returns a 200 and user undefined when authorization empty or null', async () => {
-  await request(app).get('/user').expect(200)
-  await request(app).get('/user').set('authorization', '').expect(200)
-  await request(app).get('/user').set('Cookie', '').expect(200)
+  await request(app).get('/user').expect(401)
+  await request(app).get('/user').set('authorization', '').expect(401)
+  await request(app).get('/user').set('Cookie', '').expect(401)
 })
 
 it('returns a 200 on successful current client with token on authorization header', async () => {

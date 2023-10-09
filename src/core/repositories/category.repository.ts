@@ -20,11 +20,12 @@ export class CategoryRepository {
     return await this.categoryModel.findOne({ ...filter }).lean()
   }
 
-  async create(title: string, user: string): Promise<void> {
-    await new this.categoryModel({
+  async create(title: string, user: string): Promise<CategoryDocument> {
+    const newCategory = await new this.categoryModel({
       title,
       user,
     }).save()
+    return newCategory
   }
 
   async update(id: string, title: string): Promise<void> {

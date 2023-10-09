@@ -1,3 +1,4 @@
 {
-	"Authentication failed": "Authentication failed"
+	"Authentication failed": "Authentication failed",
+	"The specified Resource does not exist": "The specified Resource does not exist"
 }

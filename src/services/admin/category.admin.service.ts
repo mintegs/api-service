@@ -23,9 +23,9 @@ export default class CategoryAdminService extends BaseService {
     }
   }
 
-  async create(title: string, user: string): Promise<void> {
+  async create(title: string, user: string): Promise<CategoryDocument> {
     try {
-      await this.categoryRepository.create(title, user)
+      return await this.categoryRepository.create(title, user)
     } catch (error) {
       throw error
     }

@@ -7,5 +7,6 @@
 	"Username is already": "Username is already",
 	"The specified Resource does not exist": "The specified Resource does not exist",
 	"username must contain at most 25 character(s)": "username must contain at most 25 character(s)",
-	"Authentication failed": "Authentication failed"
+	"Authentication failed": "Authentication failed",
+	"username invalid": "username invalid"
 }
