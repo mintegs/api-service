@@ -17,10 +17,11 @@ class CategoryRepository {
         return await this.categoryModel.findOne({ ...filter }).lean();
     }
     async create(title, user) {
-        await new this.categoryModel({
+        const newCategory = await new this.categoryModel({
             title,
             user,
         }).save();
+        return newCategory;
     }
     async update(id, title) {
         await this.categoryModel.findByIdAndUpdate(id, { title }).lean();

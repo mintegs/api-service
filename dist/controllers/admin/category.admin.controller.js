@@ -36,8 +36,8 @@ class CategoryAdminController extends baseController_1.default {
     }
     async create({ body: { title }, session }, res, next) {
         try {
-            await this.categoryAdminService.create(title, session.user.id);
-            return this.sendResponse(res, 201);
+            const newCategory = await this.categoryAdminService.create(title, session.user.id);
+            return this.sendResponse(res, 201, newCategory);
         }
         catch (error) {
             next(error);

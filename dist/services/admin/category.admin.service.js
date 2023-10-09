@@ -28,7 +28,7 @@ class CategoryAdminService extends baseService_1.default {
     }
     async create(title, user) {
         try {
-            await this.categoryRepository.create(title, user);
+            return await this.categoryRepository.create(title, user);
         }
         catch (error) {
             throw error;
