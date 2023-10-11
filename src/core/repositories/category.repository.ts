@@ -3,6 +3,7 @@ import {
   CategoryDocument,
   CategoryFilter,
   CategoryModel,
+  UserDocument,
 } from '../contracts/models'
 
 export class CategoryRepository {
@@ -13,7 +14,14 @@ export class CategoryRepository {
   }
 
   async findAll(filter?: CategoryFilter): Promise<CategoryDocument[]> {
-    return await this.categoryModel.find({ ...filter }).lean()
+    return await this.categoryModel
+      .find({ ...filter })
+      .populate<{ user: UserDocument }>({
+        path: 'user',
+        select: 'username -_id',
+      })
+      .populate('articles')
+      .lean()
   }
 
   async findOne(filter: CategoryFilter): Promise<CategoryDocument> {

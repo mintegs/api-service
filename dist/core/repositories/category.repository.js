@@ -11,7 +11,14 @@ class CategoryRepository {
         this.categoryModel = category_model_1.default;
     }
     async findAll(filter) {
-        return await this.categoryModel.find({ ...filter }).lean();
+        return await this.categoryModel
+            .find({ ...filter })
+            .populate({
+            path: 'user',
+            select: 'username -_id',
+        })
+            .populate('articles')
+            .lean();
     }
     async findOne(filter) {
         return await this.categoryModel.findOne({ ...filter }).lean();

@@ -24,6 +24,13 @@ categorySchema.post('save', function (error, doc, next) {
   else next()
 })
 
+categorySchema.virtual('articles', {
+  ref: 'Article',
+  localField: '_id',
+  foreignField: 'category',
+  count: true,
+})
+
 const Category = model<CategoryDocument>('Category', categorySchema)
 
 export default Category

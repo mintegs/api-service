@@ -20,5 +20,11 @@ categorySchema.post('save', function (error, doc, next) {
     else
         next();
 });
+categorySchema.virtual('articles', {
+    ref: 'Article',
+    localField: '_id',
+    foreignField: 'category',
+    count: true,
+});
 const Category = (0, mongoose_1.model)('Category', categorySchema);
 exports.default = Category;
