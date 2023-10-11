@@ -28,8 +28,10 @@ export class CategoryRepository {
     return newCategory
   }
 
-  async update(id: string, title: string): Promise<void> {
-    await this.categoryModel.findByIdAndUpdate(id, { title }).lean()
+  async update(id: string, title: string): Promise<CategoryDocument> {
+    return await this.categoryModel
+      .findByIdAndUpdate(id, { title }, { new: true })
+      .lean()
   }
 
   async delete(id: string): Promise<void> {

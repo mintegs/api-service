@@ -31,9 +31,9 @@ export default class CategoryAdminService extends BaseService {
     }
   }
 
-  async update(id: string, title: string): Promise<void> {
+  async update(id: string, title: string): Promise<CategoryDocument> {
     try {
-      await this.categoryRepository.update(id, title)
+      return await this.categoryRepository.update(id, title)
     } catch (error) {
       throw error
     }
