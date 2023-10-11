@@ -57,8 +57,8 @@ class CategoryAdminController extends BaseController {
     next: NextFunction
   ) {
     try {
-      await this.categoryAdminService.update(id, title)
-      return this.sendResponse(res, 200)
+      const updateCategory = await this.categoryAdminService.update(id, title)
+      return this.sendResponse(res, 200, updateCategory)
     } catch (error) {
       next(error)
     }

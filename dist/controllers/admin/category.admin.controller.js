@@ -45,8 +45,8 @@ class CategoryAdminController extends baseController_1.default {
     }
     async update({ params: { id }, body: { title } }, res, next) {
         try {
-            await this.categoryAdminService.update(id, title);
-            return this.sendResponse(res, 200);
+            const updateCategory = await this.categoryAdminService.update(id, title);
+            return this.sendResponse(res, 200, updateCategory);
         }
         catch (error) {
             next(error);
