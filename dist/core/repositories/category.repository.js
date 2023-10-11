@@ -24,7 +24,9 @@ class CategoryRepository {
         return newCategory;
     }
     async update(id, title) {
-        await this.categoryModel.findByIdAndUpdate(id, { title }).lean();
+        return await this.categoryModel
+            .findByIdAndUpdate(id, { title }, { new: true })
+            .lean();
     }
     async delete(id) {
         await this.categoryModel.findByIdAndDelete(id).lean();

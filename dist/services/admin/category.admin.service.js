@@ -36,7 +36,7 @@ class CategoryAdminService extends baseService_1.default {
     }
     async update(id, title) {
         try {
-            await this.categoryRepository.update(id, title);
+            return await this.categoryRepository.update(id, title);
         }
         catch (error) {
             throw error;
