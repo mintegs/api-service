@@ -1,4 +1,12 @@
 {
-	"Authentication failed": "Authentication failed",
-	"The specified Resource does not exist": "The specified Resource does not exist"
+  "Title is already": "عنوان قبلا ثبت شده است",
+  "status Invalid status": "status Invalid status",
+  "email Required": "ایمیل خود را وارد کنید",
+  "email Invalid email": "ایمیل معتبر نمی‌باشد",
+  "Email is already": "ایمیل قبلا ثبت شده است",
+  "Username is already": "نام کاربری قبلا ثبت شده است",
+  "The specified Resource does not exist": "The specified Resource does not exist",
+  "username must contain at most 25 character(s)": "نام کاربری نمی‌تواند بیشتر از ۲۵ کاراکتر باشد",
+  "Authentication failed": "احراز هویت باموفقیت انجام نشد",
+  "username invalid": "نام کاربری معتبر نیست"
 }
