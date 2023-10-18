@@ -25,7 +25,7 @@ export class ArticleRepository {
         path: 'category',
         select: 'title -_id',
       })
-      .select('title image content -_id')
+      .select('title status createdAt updatedAt -_id')
       .sort('-createdAt')
       .lean()
   }
