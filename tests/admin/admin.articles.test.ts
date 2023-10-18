@@ -35,12 +35,15 @@ it('GET /admin/articles', async () => {
     .get('/admin/articles')
     .set('authorization', token)
     .expect(200)
+
+  console.log('response.articles', response.body.articles[0])
   expect(response.body && Array.isArray([response.body.articles])).toBe(true)
   expect(response.body.articles[0].title).toBeDefined()
   expect(response.body.articles[0].user).toBeDefined()
   expect(response.body.articles[0].category).toBeDefined()
-  expect(response.body.articles[0].content).toBeDefined()
-  expect(response.body.articles[0].image).toBeDefined()
+  expect(response.body.articles[0].createdAt).toBeDefined()
+  expect(response.body.articles[0].updatedAt).toBeDefined()
+  expect(response.body.articles[0].status).toBeDefined()
 
   expect(response.body.articles.length).toEqual(2)
 })

@@ -39,8 +39,9 @@ it('GET /user/articles', async () => {
   expect(response.body.articles[0].title).toBeDefined()
   expect(response.body.articles[0].user).toBeDefined()
   expect(response.body.articles[0].category).toBeDefined()
-  expect(response.body.articles[0].content).toBeDefined()
-  expect(response.body.articles[0].image).toBeDefined()
+  expect(response.body.articles[0].createdAt).toBeDefined()
+  expect(response.body.articles[0].updatedAt).toBeDefined()
+  expect(response.body.articles[0].status).toBeDefined()
 
   expect(response.body.articles.length).toEqual(2)
 })
