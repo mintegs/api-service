@@ -21,7 +21,7 @@ class ArticleRepository {
             path: 'category',
             select: 'title -_id',
         })
-            .select('title status createdAt updatedAt -_id')
+            .select('title status createdAt updatedAt _id')
             .sort('-createdAt')
             .lean();
     }
@@ -30,7 +30,7 @@ class ArticleRepository {
             .findOne({ ...filter })
             .populate([
             { path: 'user', select: 'username -_id' },
-            { path: 'category', select: 'title -_id' },
+            { path: 'category', select: 'title _id' },
         ])
             .lean();
     }
