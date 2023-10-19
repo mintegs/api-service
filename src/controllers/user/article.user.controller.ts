@@ -30,8 +30,8 @@ class ArticleUserController extends BaseController {
     next: NextFunction
   ) {
     try {
-      await this.articleUserService.create(body, user.id)
-      return this.sendResponse(res, 201)
+      const newArticle = await this.articleUserService.create(body, user.id)
+      return this.sendResponse(res, 201, newArticle)
     } catch (error) {
       next(error)
     }

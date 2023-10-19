@@ -20,7 +20,7 @@ class ArticleUserService extends baseService_1.default {
     }
     async create(data, user) {
         try {
-            await this.articleRepository.create({
+            return await this.articleRepository.create({
                 ...data,
                 user,
             });

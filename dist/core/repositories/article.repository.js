@@ -35,9 +35,13 @@ class ArticleRepository {
             .lean();
     }
     async create(data) {
-        await new this.articleModel({
+        const newArticle = await new this.articleModel({
             ...data,
-        }).save();
+        }, 'title user status category createAt updatedAt').save();
+        return newArticle.populate([
+            { path: 'user', select: 'username -_id' },
+            { path: 'category', select: 'title -_id' },
+        ]);
     }
     async update(query, data) {
         await this.articleModel.findOneAndUpdate({ ...query }, { ...data }).lean();

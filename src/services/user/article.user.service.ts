@@ -15,9 +15,9 @@ export default class ArticleUserService extends BaseService {
     }
   }
 
-  async create(data: any, user: string): Promise<void> {
+  async create(data: any, user: string): Promise<ArticleDocument> {
     try {
-      await this.articleRepository.create({
+      return await this.articleRepository.create({
         ...data,
         user,
       })

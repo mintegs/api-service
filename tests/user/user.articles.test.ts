@@ -56,7 +56,7 @@ it('POST /user/articles', async () => {
       user,
     })
 
-  await request(app)
+  const response = await request(app)
     .post('/user/articles')
     .set('authorization', token)
     .send({
@@ -66,6 +66,8 @@ it('POST /user/articles', async () => {
       image: faker.image.url(),
     })
     .expect(201)
+
+  console.log('create article response', response.body)
 
   await request(app)
     .post('/user/articles')

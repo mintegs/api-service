@@ -40,10 +40,21 @@ export class ArticleRepository {
       .lean()
   }
 
-  async create(data: any): Promise<void> {
-    await new this.articleModel({
-      ...data,
-    }).save()
+  async create(data: any): Promise<ArticleDocument> {
+    const newArticle = await new this.articleModel(
+      {
+        ...data,
+      },
+      'title user status category createAt updatedAt -image'
+    ).save()
+
+    return newArticle.populate<{
+      user: UserDocument
+      category: CategoryDocument
+    }>([
+      { path: 'user', select: 'username -_id' },
+      { path: 'category', select: 'title -_id' },
+    ])
   }
 
   async update(

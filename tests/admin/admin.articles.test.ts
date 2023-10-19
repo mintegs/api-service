@@ -36,7 +36,6 @@ it('GET /admin/articles', async () => {
     .set('authorization', token)
     .expect(200)
 
-  console.log('response.articles', response.body.articles[0])
   expect(response.body && Array.isArray([response.body.articles])).toBe(true)
   expect(response.body.articles[0].title).toBeDefined()
   expect(response.body.articles[0].user).toBeDefined()

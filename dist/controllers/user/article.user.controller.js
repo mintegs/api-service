@@ -25,8 +25,8 @@ class ArticleUserController extends baseController_1.default {
     }
     async create({ body, session: { user } }, res, next) {
         try {
-            await this.articleUserService.create(body, user.id);
-            return this.sendResponse(res, 201);
+            const newArticle = await this.articleUserService.create(body, user.id);
+            return this.sendResponse(res, 201, newArticle);
         }
         catch (error) {
             next(error);
