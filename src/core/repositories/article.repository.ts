@@ -41,12 +41,9 @@ export class ArticleRepository {
   }
 
   async create(data: any): Promise<ArticleDocument> {
-    const newArticle = await new this.articleModel(
-      {
-        ...data,
-      },
-      'title user status category createAt updatedAt -image'
-    ).save()
+    const newArticle = await new this.articleModel({
+      ...data,
+    }).save()
 
     return newArticle.populate<{
       user: UserDocument

@@ -37,7 +37,7 @@ class ArticleRepository {
     async create(data) {
         const newArticle = await new this.articleModel({
             ...data,
-        }, 'title user status category createAt updatedAt').save();
+        }).save();
         return newArticle.populate([
             { path: 'user', select: 'username -_id' },
             { path: 'category', select: 'title -_id' },
